@@ -1,0 +1,30 @@
+# SOFTWARE CHECK ONLY. Tiny random model; no scientific performance claims.
+seed: 2025
+model:
+  smoke: true
+  image_size: 32
+data:
+  manifest: data/synthetic/manifest.csv
+  modality: MRI
+  task: HNSCC
+  attribute: site
+  prompt_mode: mask
+  box_jitter: 0
+train:
+  epochs: 2
+  batch_size: 4
+  lr: 0.001
+  weight_decay: 0.01
+  num_workers: 0
+  amp: false
+fairness:
+  num_groups: 2
+  warmup_epochs: 1
+  lambda_align: 0.1
+  lambda_fair: 1.0
+  background_weight: 0.05
+  pixel_threshold: 2
+  beta: 0.9
+  temperature: 0.1
+  pair_reduction: ordered_sum
+  normalize: false

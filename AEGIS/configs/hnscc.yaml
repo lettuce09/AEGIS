@@ -1,0 +1,37 @@
+# Paper hyperparameters; see docs/METHOD.md for reconstruction choices.
+seed: 2025
+model:
+  model_type: vit_b
+  image_size: 256
+  bottleneck_dim: 16
+  embedding_dim: 16
+  expert_num: 4
+  sam_checkpoint: checkpoints/sam_vit_b_01ec64.pth
+  medsegx_checkpoint: checkpoints/medsegx_vit_b.pth
+  # Explicit release choice for the appended HNSCC task; see docs/METHOD.md.
+  task_init_from: PharynxCancer
+data:
+  manifest: data/manifest.csv
+  modality: MRI
+  task: HNSCC
+  attribute: site
+  prompt_mode: mask
+  box_jitter: 0
+train:
+  epochs: 80
+  batch_size: 64
+  lr: 0.00005
+  weight_decay: 0.01
+  num_workers: 0
+  amp: true
+fairness:
+  num_groups: 2
+  warmup_epochs: 5
+  lambda_align: 0.1
+  lambda_fair: 1.0
+  background_weight: 0.05
+  pixel_threshold: 2
+  beta: 0.9
+  temperature: 0.1
+  pair_reduction: ordered_sum
+  normalize: false
