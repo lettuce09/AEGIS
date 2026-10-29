@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aegis-segmentation"
+version = "0.1.0"
+description = "Anatomy-Embedded Group-Invariant Segmentation for Fair Medical Foundation Models"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+dependencies = ["torch>=2.6,<3", "numpy>=1.24,<3", "PyYAML>=6,<7"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "build>=1"]
+preprocess = ["SimpleITK>=2.3,<3"]
+
+[project.urls]
+Repository = "https://github.com/lettuce09/AEGIS"
+
+[project.scripts]
+aegis-train = "aegis.train:main"
+aegis-evaluate = "aegis.evaluate:main"
+aegis-infer = "aegis.infer:main"
+aegis-prepare = "aegis.prepare:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
